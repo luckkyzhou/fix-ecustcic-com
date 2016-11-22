@@ -1,0 +1,268 @@
+<?php if(!defined('InSign')) exit; ?>
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>故障报修</title>
+    <link href="res/css/bootstrap.min.css" rel="stylesheet">
+    <link href="res/css/style.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="res/js/html5shiv.min.js"></script>
+      <script src="res/jsrespond.min.js"></script>
+    <![endif]-->
+    <style>
+      body {
+        background: #EFEFEF;
+      }
+      .main-title {
+        padding: 40px 15px;
+        text-align: center;
+      }
+      .radio {
+        float: left;
+        padding-right: 20px;
+      }
+      .form-control {
+        box-shadow: none;
+        height: 36px;
+      }
+      .form-control:focus {
+        border-color: #66afe9;
+        outline: 0;
+        box-shadow: none;
+      }
+      .well {
+        box-shadow: none;
+        box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        position: relative;
+        background: white;
+        border: none;
+        padding: 0;
+      }
+      .well:after {
+        width: 180px;
+        height: 30px;
+        content: " ";
+        margin-left: -90px;
+        border: 1px solid rgba(200, 200, 200, .8);
+        background: rgba(241, 241, 241, 0.6);
+        box-shadow: 0px 0 3px rgba(0, 0, 0, 0.1);
+        transform: rotate(-5deg);
+        position: absolute;
+        left: 50%;
+        top: -17px;
+      }
+      .c-success, .c-fail {
+        padding: 90px 0 30px;
+      }
+      .c-success p, .c-fail p {
+        text-align: center;
+        font-size: 20px;
+      }
+      .c-success p {
+        color: #0f9d58;
+      }
+      .c-fail p {
+        color: #d22222;
+      }
+      .c-success .c-successicon,.c-fail .c-failicon {
+        font-size: 52px;
+      }
+      legend {
+        padding-top: 17px;
+        padding-bottom: 15px;
+        text-align: center;
+        border-bottom: 2px dashed #e5e5e5;
+      }
+      .sign .form-horizontal .form-group {
+        margin-right: 0;
+        margin-left: 0;
+      }
+      .c-submit-btn {
+        margin-bottom: 0;
+        padding-top: 10px;
+      }
+      .sign .btn {
+        width: 100%;
+        border-radius: 0;
+        font-size: 19px;
+        padding: 13px 0;
+        background: #F1F1F1;
+        outline: 0 !important;
+      }
+      .sign .btn:hover {
+        background: #EEE;
+      }
+      .sign .btn:active {
+        background: #DDD;
+        box-shadow: none;
+      }
+      .c-footer {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        opacity: .8;
+      }
+      .c-footer .logop {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-title">
+        <h1>华理CIC - 电脑故障报修</h1>
+        <p class="lead">电脑故障？我们修！</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+          <?php if (!$submit): ?>
+          <div class="well sign bs-component">
+            <form class="form-horizontal" action="/" method="post">
+              <fieldset>
+                <legend>报修提交</legend>
+                <div class="form-group" style="margin-bottom: 20px;">
+                	<span class="col-xs-4 col-sm-3" style="font-size:22px; font-family:'Arial Black';text-align:right;line-height:25px;">CIC新闻</span>
+                	<!--<p class="col-sm-2"><img src="res/image/asus.jpg" alt="asus" style="max-width: 100%;" height="45" width="75"></p>-->
+                	<span class="col-xs-8 col-sm-9" style="font-size:15px; line-height:25px;"><a href="http://mp.weixin.qq.com/s?__biz=MzIwNTQzNzY5NQ==&mid=2247483692&idx=2&sn=e9d1d29ee2c53a1d73040233b419941a&chksm=9731aebca04627aa932fc78f68d4e6f07e8e77ad806fe2fec76c4a0b66dd54262705600682d4&scene=0#wechat_redirect" target="_blank">华硕校园精英派“特约撰稿人”招募令——每个人都很特别</a></span>
+                </div>
+                <div class="form-group">
+                  <label for="inputBuilding" class="col-sm-3 control-label">寝室位置 *</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="building" id="inputBuilding" placeholder="1号楼101室" required>
+                    <!--<span class="help-block">可填写多个</span>-->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputBrand" class="col-sm-3 control-label">电脑品牌 *</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="brand" id="inputBrand" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputBrandtype" class="col-sm-3 control-label">电脑型号<span style="visibility:hidden"> *</span></label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="brandtype" id="inputBrandtype" placeholder="可空，推荐填写">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputSystem" class="col-sm-3 control-label">系统版本 *</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="system" id="inputSystem" placeholder="如 Windows 7 / macOS 10.11" required>
+                    <span class="help-block">如重装系统，可填写需安装系统版本</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputDescription" class="col-sm-3 control-label">故障描述 *</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="description" id="inputDescription" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputNote" class="col-sm-3 control-label">备注<span style="visibility:hidden"> *</span></label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="note" id="inputNote" placeholder="可空，如 需要重装系统">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-3 control-label">姓名 *</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="name" id="inputName" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputContact" class="col-sm-3 control-label">联系方式 *</label>
+                  <div class="col-sm-8">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-send"></span>
+                      </span>
+                      <input type="text" class="form-control" name="contact" id="inputContact" placeholder="手机" required>
+                    </div>
+                  </div>
+                </div>
+                <!--<div class="form-group">
+                  <label class="col-sm-3 control-label">选择框</label>
+                  <div class="col-sm-8">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="core" id="optionsRadios1" value="1" required>
+                        是
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="core" id="optionsRadios2" value="0">
+                        否
+                      </label>
+                    </div>
+                  </div>
+                </div>-->
+                <div class="form-group c-submit-btn">
+                  <button type="submit" name="submit" class="btn"><span class="glyphicon glyphicon-chevron-right"></span> 提交</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <?php else: ?>
+            <?php if ($success): ?>
+            <div class="well sign c-success bs-component">
+              <p class="c-successicon"><span class="glyphicon glyphicon-ok"></span></p>
+              <p>信息提交成功！</p>
+              <p style="margin-bottom:2px;padding-top:40px;font-size:15px">CIC小伙伴们会联系你的，请耐心等待哦～<br><br>提示：<br>正常接单时间1天内，超过3天请重新报修<br>正常维修时间（接到电脑起算）2天内，超过3天无回应请反映微信或私聊部员</p>
+			  <p style="margin: 28px 30px -19px 30px;font-size:12px;color:red">※CIC服务部维修电脑一直是免费的，不收取任何费用。请注意将CIC服务部与其他名字或服务类似的部门或组织相区分（如IT部等）。</p>
+            </div>
+            <?php else: ?>
+            <div class="well sign c-fail bs-component">
+              <p class="c-failicon"><span class="glyphicon glyphicon-remove"></span></p>
+              <p>提交出错</p>
+              <p style="margin-bottom:2px;padding-top:40px;font-size:15px">很抱歉，发生了一些问题，请<a href="javascript:history.go(-1);">返回并重试</a>。</p>
+            </div>
+            <?php endif; ?>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div class="row c-footer">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+          <p class="logop"><img src="res/image/cic.png" alt="cic" style="max-width: 100%;" width="64" height="64"></p>
+          <p>CIC <span style="color:#666">@</span> Ecust</p>
+        </div>
+      </div>
+    </div><!-- /.container -->
+    <script src="res/js/jquery-1.12.4.min.js"></script>
+    <script src="res/js/bootstrap.min.js"></script>
+    <script src="res/js/jquery.validate.min.js"></script>
+    <?php if (!$submit): ?>
+    <script>
+      jQuery.extend(jQuery.validator.messages, {
+        required: "必填", remote: "格式错误", email: "格式错误", url: "格式错误", date: "格式错误", dateISO: "格式错误", number: "格式错误", digits: "格式错误", creditcard: "格式错误", equalTo: "格式错误", accept: "格式错误", maxlength: "格式错误", minlength: "格式错误", rangelength: "格式错误", range: "格式错误", max: "格式错误", min: "格式错误"
+      });
+      $('form').validate({
+        rules: {
+        },
+        highlight: function(element) {
+          $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+          $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+          if (element.attr("id") == "optionsRadios1") {
+            return;
+          }
+          if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+          } else {
+            error.insertAfter(element);
+          }
+        }
+      });
+    </script>
+    <?php endif; ?>
+  </body>
+</html>
